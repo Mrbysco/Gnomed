@@ -1,0 +1,32 @@
+{
+	"gnome.summon" : {
+    "category" : "neutral",
+        "sounds": [
+            "gnomed:gnome/gnome_spawn"
+        ]
+   },
+   "gnome.passive" : {
+    "category" : "neutral",
+        "sounds": [
+            "gnomed:gnome/gnome_ambient",
+            "gnomed:gnome/gnome_ambient1",
+            "gnomed:gnome/gnome_ambient2",
+            "gnomed:gnome/gnome_ambient3",
+            "gnomed:gnome/gnome_ambient4",
+            "gnomed:gnome/gnome_ambient5"
+        ]
+   },
+   "gnome.hurt" : {
+    "category" : "neutral",
+        "sounds": [
+            "gnomed:gnome/gnome_ambient",
+            "gnomed:gnome/gnome_ambient1"
+        ]
+   },
+   "gnome.death" : {
+    "category" : "neutral",
+        "sounds": [
+            "gnomed:gnome/gnome_death"
+        ]
+   }
+}

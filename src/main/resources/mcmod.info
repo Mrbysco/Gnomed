@@ -1,0 +1,16 @@
+[
+	{
+		"modid": "gnomed",
+		"name": "Gnomed",
+		"description": "Adds a certain gnome to minecraft.",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["Mrbysco"],
+		"credits": "Im not a Gnelf, I'm not a Gnoblin. I'm a GNOME AND YOUVE BEEN GNOMED",
+		"logoFile": "",
+		"screenshots": [],
+		"dependencies": []
+	}
+]
