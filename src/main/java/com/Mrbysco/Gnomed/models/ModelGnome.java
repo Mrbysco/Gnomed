@@ -1,4 +1,4 @@
-package com.Mrbysco.Gnomed.models;
+package com.mrbysco.gnomed.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

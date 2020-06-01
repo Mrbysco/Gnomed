@@ -1,9 +1,9 @@
-package com.Mrbysco.Gnomed.init;
+package com.mrbysco.gnomed.init;
 
-import com.Mrbysco.Gnomed.Gnomed;
-import com.Mrbysco.Gnomed.Reference;
-import com.Mrbysco.Gnomed.entities.EntityGnome;
-import com.Mrbysco.Gnomed.render.RenderGnome;
+import com.mrbysco.gnomed.Gnomed;
+import com.mrbysco.gnomed.Reference;
+import com.mrbysco.gnomed.entities.EntityGnome;
+import com.mrbysco.gnomed.render.RenderGnome;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

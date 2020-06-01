@@ -1,8 +1,8 @@
-package com.Mrbysco.Gnomed.init;
+package com.mrbysco.gnomed.init;
 
 import java.util.ArrayList;
 
-import com.Mrbysco.Gnomed.items.ItemGnomeHat;
+import com.mrbysco.gnomed.items.ItemGnomeHat;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;

@@ -1,6 +1,6 @@
-package com.Mrbysco.Gnomed.proxy;
+package com.mrbysco.gnomed.proxy;
 
-import com.Mrbysco.Gnomed.init.GnomeEntities;
+import com.mrbysco.gnomed.init.GnomeEntities;
 
 public class ClientProxy extends ServerProxy{
 	

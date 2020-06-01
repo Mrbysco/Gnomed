@@ -1,4 +1,4 @@
-package com.Mrbysco.Gnomed.init;
+package com.mrbysco.gnomed.init;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;

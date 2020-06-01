@@ -1,8 +1,9 @@
-package com.Mrbysco.Gnomed.items;
+package com.mrbysco.gnomed.items;
 
-import com.Mrbysco.Gnomed.Gnomed;
-import com.Mrbysco.Gnomed.Reference;
+import com.mrbysco.gnomed.Gnomed;
+import com.mrbysco.gnomed.Reference;
 
+import com.mrbysco.gnomed.init.GnomeTab;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,9 +12,9 @@ public class ItemGnomeHat extends Item
 {
 	public ItemGnomeHat(String registry) 
 	{
-		this.setUnlocalizedName(Reference.MOD_PREFIX + registry.replaceAll("_", ""));
+		this.setTranslationKey(Reference.MOD_PREFIX + registry.replaceAll("_", ""));
 		this.setRegistryName(registry);
-		setCreativeTab(Gnomed.gnometab);
+		setCreativeTab(GnomeTab.GNOME_TAB);
 	}
 	
 	@Override

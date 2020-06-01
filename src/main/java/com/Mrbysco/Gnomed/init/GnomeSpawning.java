@@ -1,20 +1,29 @@
-package com.Mrbysco.Gnomed.init;
+package com.mrbysco.gnomed.init;
 
-import com.Mrbysco.Gnomed.config.GnomeConfigGen;
-import com.Mrbysco.Gnomed.entities.EntityGnome;
-
+import com.mrbysco.gnomed.config.GnomeConfig;
+import com.mrbysco.gnomed.entities.EntityGnome;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class GnomeSpawning {
 
 	public static void registerSpawning() 
 	{
-		if(GnomeConfigGen.spawning.gnome.GnomeSpawning)
+		if(GnomeConfig.gnome.GnomeSpawning)
 		{
-			EntityRegistry.addSpawn(EntityGnome.class, GnomeConfigGen.spawning.gnome.GnomeWeigth, 1, 4, EnumCreatureType.CREATURE, Biomes.FOREST, Biomes.FOREST_HILLS, Biomes.MUTATED_FOREST, Biomes.BIRCH_FOREST, Biomes.MUTATED_BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.MUTATED_BIRCH_FOREST_HILLS, Biomes.ROOFED_FOREST, Biomes.MUTATED_ROOFED_FOREST);
-			EntityRegistry.addSpawn(EntityGnome.class, GnomeConfigGen.spawning.gnome.GnomeWeigth, 1, 4, EnumCreatureType.AMBIENT, Biomes.FOREST, Biomes.FOREST_HILLS, Biomes.MUTATED_FOREST, Biomes.BIRCH_FOREST, Biomes.MUTATED_BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.MUTATED_BIRCH_FOREST_HILLS, Biomes.ROOFED_FOREST, Biomes.MUTATED_ROOFED_FOREST);
+			String[] gnomeBiomes = GnomeConfig.gnome.GnomeBiomes;
+			if(gnomeBiomes.length > 0) {
+				for(String biomeName : gnomeBiomes) {
+					ResourceLocation registryLocation = new ResourceLocation(biomeName);
+					Biome biome = ForgeRegistries.BIOMES.getValue(registryLocation);
+					if(biome != null) {
+						EntityRegistry.addSpawn(EntityGnome.class, GnomeConfig.gnome.GnomeWeigth, 1, 4, EnumCreatureType.CREATURE, biome);
+					}
+				}
+			}
 		}
 	}
 }

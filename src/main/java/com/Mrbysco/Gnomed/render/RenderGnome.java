@@ -1,8 +1,8 @@
-package com.Mrbysco.Gnomed.render;
+package com.mrbysco.gnomed.render;
 
-import com.Mrbysco.Gnomed.Reference;
-import com.Mrbysco.Gnomed.entities.EntityGnome;
-import com.Mrbysco.Gnomed.models.ModelGnome;
+import com.mrbysco.gnomed.Reference;
+import com.mrbysco.gnomed.entities.EntityGnome;
+import com.mrbysco.gnomed.models.ModelGnome;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;

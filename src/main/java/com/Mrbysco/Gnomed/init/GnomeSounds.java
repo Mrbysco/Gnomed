@@ -1,6 +1,6 @@
-package com.Mrbysco.Gnomed.init;
+package com.mrbysco.gnomed.init;
 
-import com.Mrbysco.Gnomed.Reference;
+import com.mrbysco.gnomed.Reference;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;

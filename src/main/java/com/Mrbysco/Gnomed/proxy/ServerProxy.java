@@ -1,4 +1,4 @@
-package com.Mrbysco.Gnomed.proxy;
+package com.mrbysco.gnomed.proxy;
 
 public class ServerProxy extends CommonProxy{
 	public void Preinit() {

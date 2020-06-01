@@ -1,12 +1,12 @@
-package com.Mrbysco.Gnomed.entities;
+package com.mrbysco.gnomed.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.Mrbysco.Gnomed.init.GnomeLoot;
-import com.Mrbysco.Gnomed.init.GnomeSounds;
+import com.mrbysco.gnomed.init.GnomeLoot;
+import com.mrbysco.gnomed.init.GnomeSounds;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
