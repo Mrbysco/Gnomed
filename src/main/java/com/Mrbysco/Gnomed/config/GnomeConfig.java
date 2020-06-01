@@ -25,29 +25,29 @@ public class GnomeConfig
 
 		@Config.Comment("Adding lines / removing lines specifies what biomes the gnome spawns in")
 		public String[] GnomeBiomes = new String[]
-				{
-						"minecraft:forest",
-						"minecraft:taiga",
-						"minecraft:forest_hills",
-						"minecraft:taiga_hills",
-						"minecraft:jungle_edge",
-						"minecraft:birch_forest",
-						"minecraft:birch_forest_hills",
-						"minecraft:roofed_forest",
-						"minecraft:taiga_cold",
-						"minecraft:taiga_cold_hills",
-						"minecraft:redwood_taiga",
-						"minecraft:redwood_taiga_hills",
-						"minecraft:extreme_hills_with_trees",
-						"minecraft:mutated_forest",
-						"minecraft:mutated_taiga",
-						"minecraft:mutated_birch_forest",
-						"minecraft:mutated_birch_forest_hills",
-						"minecraft:mutated_roofed_forest",
-						"minecraft:mutated_taiga_cold",
-						"minecraft:mutated_redwood_taiga",
-						"minecraft:mutated_redwood_taiga_hills"
-				};
+		{
+			"minecraft:forest",
+			"minecraft:taiga",
+			"minecraft:forest_hills",
+			"minecraft:taiga_hills",
+			"minecraft:jungle_edge",
+			"minecraft:birch_forest",
+			"minecraft:birch_forest_hills",
+			"minecraft:roofed_forest",
+			"minecraft:taiga_cold",
+			"minecraft:taiga_cold_hills",
+			"minecraft:redwood_taiga",
+			"minecraft:redwood_taiga_hills",
+			"minecraft:extreme_hills_with_trees",
+			"minecraft:mutated_forest",
+			"minecraft:mutated_taiga",
+			"minecraft:mutated_birch_forest",
+			"minecraft:mutated_birch_forest_hills",
+			"minecraft:mutated_roofed_forest",
+			"minecraft:mutated_taiga_cold",
+			"minecraft:mutated_redwood_taiga",
+			"minecraft:mutated_redwood_taiga_hills"
+		};
 	}
 
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
