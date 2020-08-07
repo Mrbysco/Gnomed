@@ -1,9 +1,10 @@
 package com.mrbysco.gnomed.init;
 
-import com.mrbysco.gnomed.Gnomed;
+import com.mrbysco.gnomed.entities.GnomeEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.common.BiomeDictionary;
@@ -19,5 +20,9 @@ public class GnomeSpawning {
 			}
 		}
 		EntitySpawnPlacementRegistry.register(GnomeRegistry.GNOME.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::canSpawnOn);
+	}
+
+	public static void entityAttributes() {
+		GlobalEntityTypeAttributes.put(GnomeRegistry.GNOME.get(), GnomeEntity.registerAttributes().create());
 	}
 }

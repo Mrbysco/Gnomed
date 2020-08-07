@@ -4,8 +4,9 @@ import com.mrbysco.gnomed.init.GnomeRegistry;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
@@ -43,16 +44,12 @@ public class GnomeEntity extends CreatureEntity {
 		this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setCallsForHelp(GnomeEntity.class));
 	}
 
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
-		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
-		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30.0D);
-
-		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+		return GnomeEntity.func_233666_p_()
+				.createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.30000001192092896D)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, (double)0.4D)
+				.createMutableAttribute(Attributes.FOLLOW_RANGE, (double)30.0D);
 	}
 
 	@Override
