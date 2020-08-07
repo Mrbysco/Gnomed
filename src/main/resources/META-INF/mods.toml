@@ -1,0 +1,15 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+
+[[mods]]
+modId="gnomed"
+version="${file.jarVersion}"
+displayName="Gnomed"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/gnomed"
+authors="Mrbysco"
+description='''
+Adds a certain gnome to minecraft
+'''
+credits='''
+Im not a Gnelf, I'm not a Gnoblin. I'm a GNOME AND YOUVE BEEN GNOMED
+'''

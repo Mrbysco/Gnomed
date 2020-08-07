@@ -1,29 +1,22 @@
 package com.mrbysco.gnomed.init;
 
-import com.mrbysco.gnomed.config.GnomeConfig;
-import com.mrbysco.gnomed.entities.EntityGnome;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.util.ResourceLocation;
+import com.mrbysco.gnomed.entities.GnomeEntity;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class GnomeSpawning {
 
-	public static void registerSpawning() 
-	{
-		if(GnomeConfig.gnome.GnomeSpawning)
-		{
-			String[] gnomeBiomes = GnomeConfig.gnome.GnomeBiomes;
-			if(gnomeBiomes.length > 0) {
-				for(String biomeName : gnomeBiomes) {
-					ResourceLocation registryLocation = new ResourceLocation(biomeName);
-					Biome biome = ForgeRegistries.BIOMES.getValue(registryLocation);
-					if(biome != null) {
-						EntityRegistry.addSpawn(EntityGnome.class, GnomeConfig.gnome.GnomeWeigth, 1, 4, EnumCreatureType.CREATURE, biome);
-					}
-				}
+	public static void registerSpawning() {
+		for(Biome biome : ForgeRegistries.BIOMES) {
+			if(BiomeDictionary.hasType(biome, Type.FOREST)) {
+				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(GnomeRegistry.GNOME.get(), 12, 1, 4));
 			}
 		}
+		EntitySpawnPlacementRegistry.register(GnomeRegistry.GNOME.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GnomeEntity::canSpawnOn);
 	}
 }

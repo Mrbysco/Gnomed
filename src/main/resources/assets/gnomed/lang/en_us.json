@@ -1,0 +1,14 @@
+{
+    "_comment": "hat",
+    "item.gnomed.gnome_hat": "Gnome Hat",
+    "item.gnomed.gnome_spawn_egg": "Gnome Spawn Egg",
+
+    "_comment": "Creative tab name",
+    "itemGroup.gnomed": "Gnomed",
+
+    "_comment": "Entity names",
+    "entity.gnomed.gnome": "Gnome",
+
+    "_comment": "Config name",
+    "gnomed.config.title": "Gnomed Config"
+}

@@ -2,14 +2,16 @@
 	"gnome.summon" : {
     "category" : "neutral",
         "sounds": [
-            "gnomed:gnome/gnome_spawn"
+          {
+            "name" : "gnomed:gnome/gnome_spawn",
+            "stream" : true
+          }
         ]
    },
    "gnome.passive" : {
     "category" : "neutral",
         "sounds": [
             "gnomed:gnome/gnome_ambient",
-            "gnomed:gnome/gnome_ambient1",
             "gnomed:gnome/gnome_ambient2",
             "gnomed:gnome/gnome_ambient3",
             "gnomed:gnome/gnome_ambient4",
@@ -19,8 +21,7 @@
    "gnome.hurt" : {
     "category" : "neutral",
         "sounds": [
-            "gnomed:gnome/gnome_ambient",
-            "gnomed:gnome/gnome_ambient1"
+            "gnomed:gnome/gnome_ambient"
         ]
    },
    "gnome.death" : {

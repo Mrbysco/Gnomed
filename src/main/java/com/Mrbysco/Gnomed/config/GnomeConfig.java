@@ -1,65 +1,45 @@
 package com.mrbysco.gnomed.config;
 
-import com.mrbysco.gnomed.Reference;
+import com.mrbysco.gnomed.Gnomed;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.config.ModConfig;
+import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-@Config(modid = Reference.MOD_ID, name = "Gnomed", category = "")
-@Config.LangKey("gnomed.config.title")
 public class GnomeConfig
 {
-	@Config.Comment({"Gnome settings"})
-	@Config.Name("Gnome settings")
-	public static Gnome gnome = new Gnome();
-	public static class Gnome {
-		@Config.Comment("Setting this to true lets Gnome spawn in the world (Default: false)")
-		public boolean GnomeSpawning = false;
+	public static class Server {
+		public final BooleanValue GnomeSpawning;
 
-		@Config.Comment("Sets the weigth, higher means it has a bigger spawns chance (Default: 12)")
-		@Config.RangeInt(min = 1)
-		public int GnomeWeigth = 12;
+		Server(ForgeConfigSpec.Builder builder) {
+			builder.comment("Gnome settings")
+					.push("Gnome");
 
-		@Config.Comment("Adding lines / removing lines specifies what biomes the gnome spawns in")
-		public String[] GnomeBiomes = new String[]
-		{
-			"minecraft:forest",
-			"minecraft:taiga",
-			"minecraft:forest_hills",
-			"minecraft:taiga_hills",
-			"minecraft:jungle_edge",
-			"minecraft:birch_forest",
-			"minecraft:birch_forest_hills",
-			"minecraft:roofed_forest",
-			"minecraft:taiga_cold",
-			"minecraft:taiga_cold_hills",
-			"minecraft:redwood_taiga",
-			"minecraft:redwood_taiga_hills",
-			"minecraft:extreme_hills_with_trees",
-			"minecraft:mutated_forest",
-			"minecraft:mutated_taiga",
-			"minecraft:mutated_birch_forest",
-			"minecraft:mutated_birch_forest_hills",
-			"minecraft:mutated_roofed_forest",
-			"minecraft:mutated_taiga_cold",
-			"minecraft:mutated_redwood_taiga",
-			"minecraft:mutated_redwood_taiga_hills"
-		};
+			GnomeSpawning = builder
+					.comment("Setting this to true lets Gnome spawn in the world (Default: true)")
+					.define("GnomeSpawning", true);
+
+			builder.pop();
+		}
 	}
 
-	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-	private static class EventHandler 
-	{
-		@SubscribeEvent
-		public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) 
-		{
-			if (event.getModID().equals(Reference.MOD_ID)) 
-			{
-				ConfigManager.sync(Reference.MOD_ID, Config.Type.INSTANCE);
-			}
-		}
+	public static final ForgeConfigSpec serverSpec;
+	public static final GnomeConfig.Server SERVER;
+
+	static {
+		final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(GnomeConfig.Server::new);
+		serverSpec = specPair.getRight();
+		SERVER = specPair.getLeft();
+	}
+
+	@SubscribeEvent
+	public static void onLoad(final ModConfig.Loading configEvent) {
+		Gnomed.logger.debug("Loaded Gnomed's config file {}", configEvent.getConfig().getFileName());
+	}
+
+	@SubscribeEvent
+	public static void onFileChange(final ModConfig.ModConfigEvent configEvent) {
+		Gnomed.logger.debug("Gnomed's config just got changed on the file system!");
 	}
 }
