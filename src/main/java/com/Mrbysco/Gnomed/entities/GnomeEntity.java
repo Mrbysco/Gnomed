@@ -1,9 +1,7 @@
 package com.mrbysco.gnomed.entities;
 
-import com.mrbysco.gnomed.config.GnomeConfig;
 import com.mrbysco.gnomed.init.GnomeRegistry;
 import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,14 +25,12 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class GnomeEntity extends CreatureEntity
-{
+public class GnomeEntity extends CreatureEntity {
 	public GnomeEntity(EntityType<? extends GnomeEntity> entityType, World worldIn) {
 		super(entityType, worldIn);
 	}
 
-	protected void registerGoals()
-	{
+	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new SwimGoal(this));
 		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
@@ -48,8 +44,7 @@ public class GnomeEntity extends CreatureEntity
 	}
 
 	@Override
-	protected void registerAttributes()
-	{
+	protected void registerAttributes() {
 		super.registerAttributes();
 
 		getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
@@ -72,9 +67,7 @@ public class GnomeEntity extends CreatureEntity
 			if (isPotionActive(Effects.INVISIBILITY)) {
 				removePotionEffect(Effects.INVISIBILITY);
 			}
-		} 
-    	else 
-    	{
+		} else {
 			if (!isPotionActive(Effects.INVISIBILITY)) {
 				addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 480 * 20, 0));
 			}
@@ -86,14 +79,14 @@ public class GnomeEntity extends CreatureEntity
 	@Nullable
 	@Override
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-		if(playerDetection(5) && !world.isRemote) {
+		if(!world.isRemote && playerDetection(5)) {
 			this.playSound(GnomeRegistry.GNOME_SPAWN.get(), 1F, 1F);
 		}
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 
 	private boolean playerDetection(int range) {
-		AxisAlignedBB axisalignedbb = new AxisAlignedBB(posX - 0.5f, posY - 0.5f, posZ - 0.5f, posX + 0.5f, posY + 0.5f, posZ + 0.5f)
+		AxisAlignedBB axisalignedbb = new AxisAlignedBB(getPosX() - 0.5f, getPosY() - 0.5f, getPosZ() - 0.5f, getPosX() + 0.5f, getPosY() + 0.5f, getPosZ() + 0.5f)
 				.expand(-range, -range, -range).expand(range, range, range);
 		return !world.getEntitiesWithinAABB(PlayerEntity.class, axisalignedbb).isEmpty();
 	}
@@ -125,19 +118,4 @@ public class GnomeEntity extends CreatureEntity
     {
         return 0.4F;
     }
-	
-	@Override
-	public boolean attackEntityAsMob(Entity entityIn)
-    {
-        return entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
-    }
-
-	@Override
-	public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
-		if(spawnReasonIn == SpawnReason.NATURAL) {
-			return super.canSpawn(worldIn, spawnReasonIn) && GnomeConfig.SERVER.GnomeSpawning.get();
-		} else {
-			return super.canSpawn(worldIn, spawnReasonIn);
-		}
-	}
 }

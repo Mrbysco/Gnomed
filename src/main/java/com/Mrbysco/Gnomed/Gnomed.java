@@ -1,16 +1,12 @@
 package com.mrbysco.gnomed;
 
 import com.mrbysco.gnomed.client.ClientHandler;
-import com.mrbysco.gnomed.config.GnomeConfig;
 import com.mrbysco.gnomed.init.GnomeRegistry;
 import com.mrbysco.gnomed.init.GnomeSpawning;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -22,8 +18,6 @@ public class Gnomed {
 
 	public Gnomed() {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, GnomeConfig.serverSpec);
-		eventBus.register(GnomeConfig.class);
 
 		GnomeRegistry.ITEMS.register(eventBus);
 		GnomeRegistry.ENTITIES.register(eventBus);
@@ -38,6 +32,6 @@ public class Gnomed {
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		GnomeSpawning.registerSpawning();
+		GnomeSpawning.addSpawn();
 	}
 }

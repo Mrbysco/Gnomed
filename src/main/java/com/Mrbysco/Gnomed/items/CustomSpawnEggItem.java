@@ -23,9 +23,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceContext.FluidMode;
+import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import net.minecraft.world.spawner.AbstractSpawner;
 import net.minecraftforge.api.distmarker.Dist;
@@ -89,32 +88,32 @@ public class CustomSpawnEggItem extends Item {
         }
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand handIn) {
-        ItemStack stack = player.getHeldItem(handIn);
-        RayTraceResult traceResult = rayTrace(worldIn, player, FluidMode.SOURCE_ONLY);
-        if (traceResult.getType() != Type.BLOCK) {
-            return ActionResult.newResult(ActionResultType.PASS, stack);
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack itemstack = playerIn.getHeldItem(handIn);
+        RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
+        if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
+            return ActionResult.resultPass(itemstack);
         } else if (worldIn.isRemote) {
-            return ActionResult.newResult(ActionResultType.SUCCESS, stack);
+            return ActionResult.resultSuccess(itemstack);
         } else {
-            BlockRayTraceResult blockRayTraceResult = (BlockRayTraceResult)traceResult;
-            BlockPos pos = blockRayTraceResult.getPos();
-            if (!(worldIn.getBlockState(pos).getBlock() instanceof FlowingFluidBlock)) {
-                return ActionResult.newResult(ActionResultType.PASS, stack);
-            } else if (worldIn.isBlockModifiable(player, pos) && player.canPlayerEdit(pos, blockRayTraceResult.getFace(), stack)) {
-                EntityType<?> type = this.getType(stack.getTag());
-                if (type.spawn(worldIn, stack, player, pos, SpawnReason.SPAWN_EGG, false, false) == null) {
-                    return ActionResult.newResult(ActionResultType.PASS, stack);
+            BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult)raytraceresult;
+            BlockPos blockpos = blockraytraceresult.getPos();
+            if (!(worldIn.getBlockState(blockpos).getBlock() instanceof FlowingFluidBlock)) {
+                return ActionResult.resultPass(itemstack);
+            } else if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
+                EntityType<?> entitytype = this.getType(itemstack.getTag());
+                if (entitytype.spawn(worldIn, itemstack, playerIn, blockpos, SpawnReason.SPAWN_EGG, false, false) == null) {
+                    return ActionResult.resultPass(itemstack);
                 } else {
-                    if (!player.abilities.isCreativeMode) {
-                        stack.shrink(1);
+                    if (!playerIn.abilities.isCreativeMode) {
+                        itemstack.shrink(1);
                     }
 
-                    player.addStat(Stats.ITEM_USED.get(this));
-                    return ActionResult.newResult(ActionResultType.SUCCESS, stack);
+                    playerIn.addStat(Stats.ITEM_USED.get(this));
+                    return ActionResult.resultSuccess(itemstack);
                 }
             } else {
-                return ActionResult.newResult(ActionResultType.FAIL, stack);
+                return ActionResult.resultFail(itemstack);
             }
         }
     }

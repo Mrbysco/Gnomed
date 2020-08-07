@@ -1,8 +1,8 @@
 package com.mrbysco.gnomed.client;
 
-import com.mrbysco.gnomed.entities.GnomeEntity;
+import com.mrbysco.gnomed.client.render.GnomeRenderer;
+import com.mrbysco.gnomed.init.GnomeRegistry;
 import com.mrbysco.gnomed.items.CustomSpawnEggItem;
-import com.mrbysco.gnomed.render.RenderGnome;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientHandler {
     public static void doClientStuff(final FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(GnomeEntity.class, renderManager -> new RenderGnome(renderManager));
+        RenderingRegistry.registerEntityRenderingHandler(GnomeRegistry.GNOME.get(), GnomeRenderer::new);
     }
 
     public static void registerItemColors(final ColorHandlerEvent.Item event) {

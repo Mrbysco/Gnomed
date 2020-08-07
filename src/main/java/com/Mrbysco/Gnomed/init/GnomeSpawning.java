@@ -11,7 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class GnomeSpawning {
 
-	public static void registerSpawning() {
+	public static void addSpawn() {
 		for(Biome biome : ForgeRegistries.BIOMES) {
 			if(BiomeDictionary.hasType(biome, Type.FOREST)) {
 				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(GnomeRegistry.GNOME.get(), 12, 1, 4));
