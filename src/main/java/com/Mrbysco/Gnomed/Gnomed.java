@@ -5,6 +5,7 @@ import com.mrbysco.gnomed.init.GnomeRegistry;
 import com.mrbysco.gnomed.init.GnomeSpawning;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -32,6 +33,6 @@ public class Gnomed {
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		GnomeSpawning.addSpawn();
+		DeferredWorkQueue.runLater(GnomeSpawning::addSpawn);
 	}
 }

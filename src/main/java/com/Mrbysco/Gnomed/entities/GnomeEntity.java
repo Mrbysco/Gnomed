@@ -47,13 +47,12 @@ public class GnomeEntity extends CreatureEntity {
 	protected void registerAttributes() {
 		super.registerAttributes();
 
-		getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-		getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
-		getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
-		getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(30.0D);
 
-		getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 	}
 
 	@Override
@@ -63,13 +62,15 @@ public class GnomeEntity extends CreatureEntity {
     
     @Override
     public void tick() {
-    	if (playerDetection(10)) {
-			if (isPotionActive(Effects.INVISIBILITY)) {
-				removePotionEffect(Effects.INVISIBILITY);
-			}
-		} else {
-			if (!isPotionActive(Effects.INVISIBILITY)) {
-				addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 480 * 20, 0));
+		if(!world.isRemote) {
+			if (playerDetection(world, 10)) {
+				if (isPotionActive(Effects.INVISIBILITY)) {
+					removePotionEffect(Effects.INVISIBILITY);
+				}
+			} else {
+				if (!isPotionActive(Effects.INVISIBILITY)) {
+					addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 480 * 20, 0));
+				}
 			}
 		}
     	
@@ -79,16 +80,16 @@ public class GnomeEntity extends CreatureEntity {
 	@Nullable
 	@Override
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-		if(!world.isRemote && playerDetection(5)) {
+		if(!worldIn.isRemote() && playerDetection(worldIn, 5)) {
 			this.playSound(GnomeRegistry.GNOME_SPAWN.get(), 1F, 1F);
 		}
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 
-	private boolean playerDetection(int range) {
+	private boolean playerDetection(IWorld worldIn, int range) {
 		AxisAlignedBB axisalignedbb = new AxisAlignedBB(getPosX() - 0.5f, getPosY() - 0.5f, getPosZ() - 0.5f, getPosX() + 0.5f, getPosY() + 0.5f, getPosZ() + 0.5f)
 				.expand(-range, -range, -range).expand(range, range, range);
-		return !world.getEntitiesWithinAABB(PlayerEntity.class, axisalignedbb).isEmpty();
+		return !worldIn.getEntitiesWithinAABB(PlayerEntity.class, axisalignedbb).isEmpty();
 	}
 
 	@Override
