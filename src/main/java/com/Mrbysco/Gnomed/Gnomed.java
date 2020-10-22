@@ -32,7 +32,7 @@ public class Gnomed {
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		GnomeSpawning.addSpawn();
+		GnomeSpawning.setupSpawnPlacement();
 		GnomeSpawning.entityAttributes();
 	}
 }

@@ -26,6 +26,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.AbstractSpawner;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -80,7 +81,7 @@ public class CustomSpawnEggItem extends Item {
             }
 
             EntityType<?> type = this.getType(stack.getTag());
-            if (type.spawn(worldIn, stack, context.getPlayer(), pos2, SpawnReason.SPAWN_EGG, true, !Objects.equals(pos, pos2) && dir == Direction.UP) != null) {
+            if (!worldIn.isRemote && type.spawn((ServerWorld)worldIn, stack, context.getPlayer(), pos2, SpawnReason.SPAWN_EGG, true, !Objects.equals(pos, pos2) && dir == Direction.UP) != null) {
                 stack.shrink(1);
             }
 
@@ -102,7 +103,7 @@ public class CustomSpawnEggItem extends Item {
                 return ActionResult.resultPass(itemstack);
             } else if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
                 EntityType<?> entitytype = this.getType(itemstack.getTag());
-                if (entitytype.spawn(worldIn, itemstack, playerIn, blockpos, SpawnReason.SPAWN_EGG, false, false) == null) {
+                if (!worldIn.isRemote && entitytype.spawn((ServerWorld)worldIn, itemstack, playerIn, blockpos, SpawnReason.SPAWN_EGG, false, false) == null) {
                     return ActionResult.resultPass(itemstack);
                 } else {
                     if (!playerIn.abilities.isCreativeMode) {

@@ -1,7 +1,6 @@
 package com.mrbysco.gnomed.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mrbysco.gnomed.Reference;
 import com.mrbysco.gnomed.client.models.ModelGnome;
 import com.mrbysco.gnomed.entities.GnomeEntity;
@@ -27,7 +26,6 @@ public class GnomeRenderer extends MobRenderer<GnomeEntity, ModelGnome<GnomeEnti
 	@Override
 	protected void preRenderCallback(GnomeEntity entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
 		super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
-		float f = 0.999F;
-		GlStateManager.scalef(0.75F,0.75F,0.75F);
+		matrixStackIn.scale(0.75F,0.75F,0.75F);
 	}
 }
