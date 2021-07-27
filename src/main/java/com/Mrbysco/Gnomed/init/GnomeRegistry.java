@@ -3,7 +3,7 @@ package com.mrbysco.gnomed.init;
 import com.mrbysco.gnomed.Reference;
 import com.mrbysco.gnomed.entities.Gnome;
 import com.mrbysco.gnomed.items.CustomSpawnEggItem;
-import com.mrbysco.gnomed.items.ItemGnomeHat;
+import com.mrbysco.gnomed.items.GnomeHatItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
@@ -19,7 +19,7 @@ public class GnomeRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Reference.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Reference.MOD_ID);
 
-    public static final RegistryObject<Item> GNOME_HAT = ITEMS.register("gnome_hat", () -> new ItemGnomeHat(new Item.Properties()));
+    public static final RegistryObject<Item> GNOME_HAT = ITEMS.register("gnome_hat", () -> new GnomeHatItem(new Item.Properties()));
     public static final RegistryObject<Item> GNOME_SPAWN_EGG = ITEMS.register("gnome_spawn_egg", () -> new CustomSpawnEggItem(() -> GnomeRegistry.GNOME.get(), 1189750, 13442571, new Item.Properties()));
 
     public static final RegistryObject<EntityType<Gnome>> GNOME = ENTITIES.register("gnome", () -> register("gnome", EntityType.Builder.<Gnome>of(Gnome::new, MobCategory.CREATURE).sized(0.5F, 0.8F)));

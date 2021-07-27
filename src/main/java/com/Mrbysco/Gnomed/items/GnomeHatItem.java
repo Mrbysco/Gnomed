@@ -3,6 +3,7 @@ package com.mrbysco.gnomed.items;
 import com.mrbysco.gnomed.init.GnomeTab;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -10,15 +11,20 @@ import net.minecraft.world.item.Wearable;
 
 import javax.annotation.Nullable;
 
-public class ItemGnomeHat extends Item implements Wearable {
-	public ItemGnomeHat(Properties properties) {
-		super(properties.tab(GnomeTab.GNOME_TAB));
+public class GnomeHatItem extends Item implements Wearable {
+	public GnomeHatItem(Properties properties) {
+		super(properties.tab(GnomeTab.GNOME_TAB).stacksTo(1));
+	}
+
+	@Nullable
+	@Override
+	public EquipmentSlot getEquipmentSlot(ItemStack stack) {
+		return EquipmentSlot.HEAD;
 	}
 
 	@Override
-	public EquipmentSlot getEquipmentSlot(ItemStack stack) {
-		System.out.println("hey");
-		return EquipmentSlot.HEAD;
+	public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
+		return armorType == EquipmentSlot.HEAD;
 	}
 
 	@Nullable
