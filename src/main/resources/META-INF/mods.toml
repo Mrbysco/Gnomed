@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[36,)"
 license="MIT"
 
 [[mods]]
@@ -12,5 +12,5 @@ description='''
 Adds a certain gnome to minecraft
 '''
 credits='''
-Im not a Gnelf, I'm not a Gnoblin. I'm a GNOME AND YOUVE BEEN GNOMED
+Im not a Gnelf, I'm not a Gnoblin. I'm a GNOME AND YOU'VE BEEN GNOMED
 '''
