@@ -42,32 +42,32 @@ public class GnomeEntity extends CreatureEntity {
 	}
 
 	private void registerTargetGoals() {
-		this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setCallsForHelp(GnomeEntity.class));
+		this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setAlertOthers(GnomeEntity.class));
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return GnomeEntity.func_233666_p_()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.30000001192092896D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, (double)0.4D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, (double)30.0D);
+		return GnomeEntity.createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 10.0D)
+				.add(Attributes.MOVEMENT_SPEED, (double)0.30000001192092896D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, (double)0.4D)
+				.add(Attributes.FOLLOW_RANGE, (double)30.0D);
 	}
 
 	@Override
-	protected void registerData() {
-		super.registerData();
+	protected void defineSynchedData() {
+		super.defineSynchedData();
 	}
     
     @Override
     public void tick() {
-		if(!world.isRemote) {
-			if (playerDetection(world, 10)) {
-				if (isPotionActive(Effects.INVISIBILITY)) {
-					removePotionEffect(Effects.INVISIBILITY);
+		if(!level.isClientSide) {
+			if (playerDetection(level, 10)) {
+				if (hasEffect(Effects.INVISIBILITY)) {
+					removeEffect(Effects.INVISIBILITY);
 				}
 			} else {
-				if (!isPotionActive(Effects.INVISIBILITY)) {
-					addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 480 * 20, 0));
+				if (!hasEffect(Effects.INVISIBILITY)) {
+					addEffect(new EffectInstance(Effects.INVISIBILITY, 480 * 20, 0));
 				}
 			}
 		}
@@ -77,17 +77,17 @@ public class GnomeEntity extends CreatureEntity {
 
 	@Nullable
 	@Override
-	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-		if(!worldIn.isRemote() && playerDetection(worldIn, 5)) {
+	public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+		if(!worldIn.isClientSide() && playerDetection(worldIn, 5)) {
 			this.playSound(GnomeRegistry.GNOME_SPAWN.get(), 1F, 1F);
 		}
-		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 
 	private boolean playerDetection(IWorld worldIn, int range) {
-		AxisAlignedBB axisalignedbb = new AxisAlignedBB(getPosX() - 0.5f, getPosY() - 0.5f, getPosZ() - 0.5f, getPosX() + 0.5f, getPosY() + 0.5f, getPosZ() + 0.5f)
-				.expand(-range, -range, -range).expand(range, range, range);
-		return !worldIn.getEntitiesWithinAABB(PlayerEntity.class, axisalignedbb).isEmpty();
+		AxisAlignedBB axisalignedbb = new AxisAlignedBB(getX() - 0.5f, getY() - 0.5f, getZ() - 0.5f, getX() + 0.5f, getY() + 0.5f, getZ() + 0.5f)
+				.expandTowards(-range, -range, -range).expandTowards(range, range, range);
+		return !worldIn.getEntitiesOfClass(PlayerEntity.class, axisalignedbb).isEmpty();
 	}
 
 	@Override

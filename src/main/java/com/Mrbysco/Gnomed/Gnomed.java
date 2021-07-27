@@ -25,7 +25,9 @@ public class Gnomed {
 
 		eventBus.addListener(this::setupCommon);
 
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+		eventBus.addListener(GnomeSpawning::registerEntityAttributes);
+
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			eventBus.addListener(ClientHandler::doClientStuff);
 			eventBus.addListener(ClientHandler::registerItemColors);
 		});
@@ -33,6 +35,5 @@ public class Gnomed {
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		GnomeSpawning.setupSpawnPlacement();
-		GnomeSpawning.entityAttributes();
 	}
 }

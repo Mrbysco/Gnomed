@@ -8,7 +8,7 @@ public class GnomeTab{
 
 	public static final ItemGroup GNOME_TAB = new ItemGroup(Reference.MOD_ID) {
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(GnomeRegistry.GNOME_HAT.get());
 		}
 	};

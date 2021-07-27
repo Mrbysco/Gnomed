@@ -19,13 +19,13 @@ public class GnomeRenderer extends MobRenderer<GnomeEntity, ModelGnome<GnomeEnti
 
 	@Nullable
 	@Override
-	public ResourceLocation getEntityTexture(GnomeEntity entity) {
+	public ResourceLocation getTextureLocation(GnomeEntity entity) {
 		return texture;
 	}
 
 	@Override
-	protected void preRenderCallback(GnomeEntity entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
-		super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
+	protected void scale(GnomeEntity entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+		super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
 		matrixStackIn.scale(0.75F,0.75F,0.75F);
 	}
 }

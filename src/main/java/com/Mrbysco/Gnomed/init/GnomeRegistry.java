@@ -22,7 +22,7 @@ public class GnomeRegistry {
     public static final RegistryObject<Item> GNOME_HAT = ITEMS.register("gnome_hat", () -> new ItemGnomeHat(new Item.Properties()));
     public static final RegistryObject<Item> GNOME_SPAWN_EGG = ITEMS.register("gnome_spawn_egg", () -> new CustomSpawnEggItem(() -> GnomeRegistry.GNOME.get(), 1189750, 13442571, new Item.Properties()));
 
-    public static final RegistryObject<EntityType<GnomeEntity>> GNOME = ENTITIES.register("gnome", () -> register("gnome", EntityType.Builder.<GnomeEntity>create(GnomeEntity::new, EntityClassification.CREATURE).size(0.5F, 0.8F)));
+    public static final RegistryObject<EntityType<GnomeEntity>> GNOME = ENTITIES.register("gnome", () -> register("gnome", EntityType.Builder.<GnomeEntity>of(GnomeEntity::new, EntityClassification.CREATURE).sized(0.5F, 0.8F)));
 
     public static final RegistryObject<SoundEvent> GNOME_SPAWN = SOUND_EVENTS.register("gnome.summon", () -> new SoundEvent(new ResourceLocation(Reference.MOD_ID, "gnome.summon")));
     public static final RegistryObject<SoundEvent> GNOME_PASSIVE = SOUND_EVENTS.register("gnome.passive", () -> new SoundEvent(new ResourceLocation(Reference.MOD_ID, "gnome.passive")));

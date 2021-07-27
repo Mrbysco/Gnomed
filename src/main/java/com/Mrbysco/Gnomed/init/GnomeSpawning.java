@@ -13,6 +13,7 @@ import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,17 +24,17 @@ public class GnomeSpawning {
 
 	@SubscribeEvent(priority =  EventPriority.HIGH)
 	public static void addSpawn(BiomeLoadingEvent event) {
-		RegistryKey<Biome> biomeKey = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
+		RegistryKey<Biome> biomeKey = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
 		if(BiomeDictionary.hasType(biomeKey, Type.FOREST) || BiomeDictionary.hasType(biomeKey, Type.JUNGLE)) {
 			event.getSpawns().getSpawner(EntityClassification.CREATURE).add(new MobSpawnInfo.Spawners(GnomeRegistry.GNOME.get(), 12, 1, 1));
 		}
 	}
 
 	public static void setupSpawnPlacement() {
-		EntitySpawnPlacementRegistry.register(GnomeRegistry.GNOME.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::canSpawnOn);
+		EntitySpawnPlacementRegistry.register(GnomeRegistry.GNOME.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
 	}
 
-	public static void entityAttributes() {
-		GlobalEntityTypeAttributes.put(GnomeRegistry.GNOME.get(), GnomeEntity.registerAttributes().create());
+	public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
+		event.put(GnomeRegistry.GNOME.get(), GnomeEntity.registerAttributes().build());
 	}
 }

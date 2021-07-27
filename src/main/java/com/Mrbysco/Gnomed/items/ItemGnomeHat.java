@@ -5,11 +5,13 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemGnomeHat extends Item
 {
 	public ItemGnomeHat(Properties properties)
 	{
-		super(properties.group(GnomeTab.GNOME_TAB));
+		super(properties.tab(GnomeTab.GNOME_TAB));
 	}
 
 	@Override
