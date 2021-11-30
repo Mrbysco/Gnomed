@@ -3,16 +3,12 @@ package com.mrbysco.gnomed;
 import com.mrbysco.gnomed.client.ClientHandler;
 import com.mrbysco.gnomed.init.GnomeRegistry;
 import com.mrbysco.gnomed.init.GnomeSpawning;
-import com.mrbysco.gnomed.items.CustomSpawnEggItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,14 +35,5 @@ public class Gnomed {
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		GnomeSpawning.setupSpawnPlacement();
-
-		event.enqueueWork(() -> {
-					for(RegistryObject<Item> registryObject : GnomeRegistry.ITEMS.getEntries()) {
-						if(registryObject.get() instanceof CustomSpawnEggItem spawnEgg) {
-							SpawnEggItem.BY_ID.put(spawnEgg.entityType.get(), spawnEgg);
-						}
-					}
-				}
-		);
 	}
 }

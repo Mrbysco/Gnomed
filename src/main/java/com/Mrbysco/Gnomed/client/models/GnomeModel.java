@@ -1,8 +1,6 @@
 package com.mrbysco.gnomed.client.models;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +10,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
 
-public class GnomeModel<T extends Mob> extends EntityModel<T> {
+public class GnomeModel<T extends Mob> extends HierarchicalModel<T> {
     private final ModelPart root;
     private final ModelPart head;
     private final ModelPart torso;
@@ -31,6 +29,10 @@ public class GnomeModel<T extends Mob> extends EntityModel<T> {
         this.right_leg = part.getChild("right_leg");
     }
 
+    @Override
+    public ModelPart root() {
+        return this.root;
+    }
 
     public static LayerDefinition createMesh() {
         MeshDefinition meshdefinition = new MeshDefinition();
@@ -88,16 +90,6 @@ public class GnomeModel<T extends Mob> extends EntityModel<T> {
 
 
         return LayerDefinition.create(meshdefinition, 64, 64);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-        left_leg.render(matrixStack, buffer, packedLight, packedOverlay);
-        right_leg.render(matrixStack, buffer, packedLight, packedOverlay);
-        torso.render(matrixStack, buffer, packedLight, packedOverlay);
-        left_arm.render(matrixStack, buffer, packedLight, packedOverlay);
-        right_arm.render(matrixStack, buffer, packedLight, packedOverlay);
-        head.render(matrixStack, buffer, packedLight, packedOverlay);
     }
 
     @Override

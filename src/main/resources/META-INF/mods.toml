@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[37,)"
+loaderVersion="[38,)"
 license="MIT"
 
 [[mods]]
@@ -14,3 +14,9 @@ Adds a certain gnome to minecraft
 credits='''
 Im not a Gnelf, I'm not a Gnoblin. I'm a GNOME AND YOU'VE BEEN GNOMED
 '''
+[[dependencies.gnomed]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18,1.19)"
+ordering="NONE"
+side="BOTH"
