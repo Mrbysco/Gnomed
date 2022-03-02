@@ -9,13 +9,9 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod(Reference.MOD_ID)
 public class Gnomed {
-	public static final Logger logger = LogManager.getLogger(Reference.MOD_ID);
-
 	public Gnomed() {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
