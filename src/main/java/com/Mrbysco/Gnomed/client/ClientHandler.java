@@ -9,13 +9,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 
 public class ClientHandler {
-    public static final ModelLayerLocation GNOME = new ModelLayerLocation(new ResourceLocation(Reference.MOD_ID, "gnome"), "gnome");
+	public static final ModelLayerLocation GNOME = new ModelLayerLocation(new ResourceLocation(Reference.MOD_ID, "gnome"), "gnome");
 
-    public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(GnomeRegistry.GNOME.get(), GnomeRenderer::new);
-    }
+	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerEntityRenderer(GnomeRegistry.GNOME.get(), GnomeRenderer::new);
+	}
 
-    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(GNOME, () -> GnomeModel.createMesh());
-    }
+	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(GNOME, () -> GnomeModel.createMesh());
+	}
 }

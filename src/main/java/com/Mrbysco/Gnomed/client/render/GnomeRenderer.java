@@ -27,6 +27,6 @@ public class GnomeRenderer extends MobRenderer<Gnome, GnomeModel<Gnome>> {
 	@Override
 	protected void scale(Gnome gnome, PoseStack poseStack, float partialTickTime) {
 		super.scale(gnome, poseStack, partialTickTime);
-		poseStack.scale(0.75F,0.75F,0.75F);
+		poseStack.scale(0.75F, 0.75F, 0.75F);
 	}
 }

@@ -48,19 +48,19 @@ public class Gnome extends PathfinderMob {
 	public static AttributeSupplier.Builder registerAttributes() {
 		return Gnome.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 10.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double)0.30000001192092896D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, (double)0.4D)
-				.add(Attributes.FOLLOW_RANGE, (double)30.0D);
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.30000001192092896D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, (double) 0.4D)
+				.add(Attributes.FOLLOW_RANGE, (double) 30.0D);
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 	}
-    
-    @Override
-    public void tick() {
-		if(!level.isClientSide) {
+
+	@Override
+	public void tick() {
+		if (!level.isClientSide) {
 			if (playerDetection(level, 10)) {
 				if (hasEffect(MobEffects.INVISIBILITY)) {
 					removeEffect(MobEffects.INVISIBILITY);
@@ -71,14 +71,14 @@ public class Gnome extends PathfinderMob {
 				}
 			}
 		}
-    	
-    	super.tick();
-    }
+
+		super.tick();
+	}
 
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		if(!worldIn.isClientSide() && playerDetection(worldIn, 5)) {
+		if (!worldIn.isClientSide() && playerDetection(worldIn, 5)) {
 			this.playSound(GnomeRegistry.GNOME_SPAWN.get(), 1F, 1F);
 		}
 		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -92,29 +92,25 @@ public class Gnome extends PathfinderMob {
 
 	@Override
 	@Nullable
-    protected SoundEvent getAmbientSound()
-    {
+	protected SoundEvent getAmbientSound() {
 		return GnomeRegistry.GNOME_PASSIVE.get();
-    }
+	}
 
 	@Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn)
-    {
-        return GnomeRegistry.GNOME_HURT.get();
-    }
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return GnomeRegistry.GNOME_HURT.get();
+	}
 
 	@Override
-    protected SoundEvent getDeathSound()
-    {
-        return GnomeRegistry.GNOME_DEATH.get();
-    }
-	
+	protected SoundEvent getDeathSound() {
+		return GnomeRegistry.GNOME_DEATH.get();
+	}
+
 	/**
-     * Returns the volume for the sounds this mob makes.
-     */
+	 * Returns the volume for the sounds this mob makes.
+	 */
 	@Override
-    protected float getSoundVolume()
-    {
-        return 0.4F;
-    }
+	protected float getSoundVolume() {
+		return 0.4F;
+	}
 }
