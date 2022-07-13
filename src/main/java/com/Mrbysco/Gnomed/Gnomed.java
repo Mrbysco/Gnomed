@@ -16,7 +16,7 @@ public class Gnomed {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		GnomeRegistry.ITEMS.register(eventBus);
-		GnomeRegistry.ENTITIES.register(eventBus);
+		GnomeRegistry.ENTITY_TYPES.register(eventBus);
 		GnomeRegistry.SOUND_EVENTS.register(eventBus);
 
 		eventBus.addListener(this::setupCommon);

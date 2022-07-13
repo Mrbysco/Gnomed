@@ -32,9 +32,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.JsonCodecProvider;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers.AddSpawnsBiomeModifier;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -98,7 +98,7 @@ public class GnomeDataGen {
 
 			@Override
 			protected Iterable<EntityType<?>> getKnownEntities() {
-				Stream<EntityType<?>> stream = GnomeRegistry.ENTITIES.getEntries().stream().map(RegistryObject::get);
+				Stream<EntityType<?>> stream = GnomeRegistry.ENTITY_TYPES.getEntries().stream().map(RegistryObject::get);
 				return stream::iterator;
 			}
 		}
