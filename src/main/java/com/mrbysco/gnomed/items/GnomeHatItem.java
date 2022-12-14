@@ -1,6 +1,5 @@
 package com.mrbysco.gnomed.items;
 
-import com.mrbysco.gnomed.init.GnomeTab;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -13,7 +12,7 @@ import javax.annotation.Nullable;
 
 public class GnomeHatItem extends Item implements Wearable {
 	public GnomeHatItem(Properties properties) {
-		super(properties.tab(GnomeTab.GNOME_TAB).stacksTo(1));
+		super(properties.stacksTo(1));
 	}
 
 	@Nullable
