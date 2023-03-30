@@ -1,1 +1,1 @@
-* Small internal change
+* Initial 1.19.4 version
