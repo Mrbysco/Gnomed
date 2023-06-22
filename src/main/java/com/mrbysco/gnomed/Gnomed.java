@@ -3,9 +3,11 @@ package com.mrbysco.gnomed;
 import com.mrbysco.gnomed.client.ClientHandler;
 import com.mrbysco.gnomed.init.GnomeRegistry;
 import com.mrbysco.gnomed.init.GnomeSpawning;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -31,11 +33,11 @@ public class Gnomed {
 		});
 	}
 
-	private void addTabContents(final CreativeModeTabEvent.BuildContents event) {
-		if (event.getTab() == CreativeModeTabs.SPAWN_EGGS) {
+	private void addTabContents(final BuildCreativeModeTabContentsEvent event) {
+		final ResourceKey<CreativeModeTab> tabKey = event.getTabKey();
+		if (tabKey == CreativeModeTabs.SPAWN_EGGS) {
 			event.accept(GnomeRegistry.GNOME_SPAWN_EGG);
-		}
-		if (event.getTab() == CreativeModeTabs.COMBAT) {
+		} else if (tabKey == CreativeModeTabs.COMBAT) {
 			event.accept(GnomeRegistry.GNOME_SPAWN_EGG);
 		}
 	}
