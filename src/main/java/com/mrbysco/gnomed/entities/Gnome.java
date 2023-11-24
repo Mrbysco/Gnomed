@@ -28,6 +28,7 @@ import net.minecraft.world.phys.AABB;
 import javax.annotation.Nullable;
 
 public class Gnome extends PathfinderMob {
+	//TODO: Add animations to the gnome based on the meme?
 	public Gnome(EntityType<? extends Gnome> entityType, Level level) {
 		super(entityType, level);
 	}
