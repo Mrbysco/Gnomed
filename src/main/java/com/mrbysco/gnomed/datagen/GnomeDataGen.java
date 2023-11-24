@@ -26,19 +26,19 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers.AddSpawnsBiomeModifier;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.world.BiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers.AddSpawnsBiomeModifier;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -56,14 +56,14 @@ public class GnomeDataGen {
 		}
 	}
 
-	public static final ResourceKey<BiomeModifier> ADD_FOREST_GNOME_SPAWN = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,
+	public static final ResourceKey<BiomeModifier> ADD_FOREST_GNOME_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS,
 			new ResourceLocation(Reference.MOD_ID, "add_forest_gnome_spawn"));
-	public static final ResourceKey<BiomeModifier> ADD_JUNGLE_GNOME_SPAWN = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,
+	public static final ResourceKey<BiomeModifier> ADD_JUNGLE_GNOME_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS,
 			new ResourceLocation(Reference.MOD_ID, "add_jungle_gnome_spawn"));
 
 	private static HolderLookup.Provider getProvider() {
 		final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
-		registryBuilder.add(ForgeRegistries.Keys.BIOME_MODIFIERS, context -> {
+		registryBuilder.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, context -> {
 			var biomeLookup = context.lookup(Registries.BIOME);
 
 			final BiomeModifier addSpawn = AddSpawnsBiomeModifier.singleSpawn(
@@ -107,7 +107,7 @@ public class GnomeDataGen {
 
 			@Override
 			protected Stream<EntityType<?>> getKnownEntityTypes() {
-				return GnomeRegistry.ENTITY_TYPES.getEntries().stream().map(RegistryObject::get);
+				return GnomeRegistry.ENTITY_TYPES.getEntries().stream().map(Supplier::get);
 			}
 		}
 	}

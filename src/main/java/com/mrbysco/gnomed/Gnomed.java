@@ -6,12 +6,12 @@ import com.mrbysco.gnomed.init.GnomeSpawning;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 @Mod(Reference.MOD_ID)
 public class Gnomed {
@@ -27,10 +27,10 @@ public class Gnomed {
 		eventBus.addListener(GnomeSpawning::registerSpawnPlacements);
 		eventBus.addListener(GnomeSpawning::registerEntityAttributes);
 
-		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientHandler::registerEntityRenders);
 			eventBus.addListener(ClientHandler::registerLayerDefinitions);
-		});
+		}
 	}
 
 	private void addTabContents(final BuildCreativeModeTabContentsEvent event) {
@@ -38,7 +38,7 @@ public class Gnomed {
 		if (tabKey == CreativeModeTabs.SPAWN_EGGS) {
 			event.accept(GnomeRegistry.GNOME_SPAWN_EGG);
 		} else if (tabKey == CreativeModeTabs.COMBAT) {
-			event.accept(GnomeRegistry.GNOME_SPAWN_EGG);
+			event.accept(GnomeRegistry.GNOME_HAT);
 		}
 	}
 }

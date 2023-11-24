@@ -28,8 +28,8 @@ import net.minecraft.world.phys.AABB;
 import javax.annotation.Nullable;
 
 public class Gnome extends PathfinderMob {
-	public Gnome(EntityType<? extends Gnome> entityType, Level worldIn) {
-		super(entityType, worldIn);
+	public Gnome(EntityType<? extends Gnome> entityType, Level level) {
+		super(entityType, level);
 	}
 
 	protected void registerGoals() {
@@ -77,17 +77,17 @@ public class Gnome extends PathfinderMob {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		if (!worldIn.isClientSide() && playerDetection(worldIn, 5)) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+		if (!levelAccessor.isClientSide() && playerDetection(levelAccessor, 5)) {
 			this.playSound(GnomeRegistry.GNOME_SPAWN.get(), 1F, 1F);
 		}
-		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		return super.finalizeSpawn(levelAccessor, difficultyInstance, spawnType, groupData, tag);
 	}
 
-	private boolean playerDetection(LevelAccessor worldIn, int range) {
-		AABB axisalignedbb = new AABB(getX() - 0.5f, getY() - 0.5f, getZ() - 0.5f, getX() + 0.5f, getY() + 0.5f, getZ() + 0.5f)
-				.expandTowards(-range, -range, -range).expandTowards(range, range, range);
-		return !worldIn.getEntitiesOfClass(Player.class, axisalignedbb).isEmpty();
+	private boolean playerDetection(LevelAccessor levelAccessor, int range) {
+		AABB aabb = new AABB(getX() - 0.5f, getY() - 0.5f, getZ() - 0.5f, getX() + 0.5f, getY() + 0.5f, getZ() + 0.5f)
+				.inflate(range);
+		return !levelAccessor.getEntitiesOfClass(Player.class, aabb).isEmpty();
 	}
 
 	@Override
