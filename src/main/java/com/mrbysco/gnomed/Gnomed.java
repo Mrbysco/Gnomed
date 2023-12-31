@@ -9,15 +9,12 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 @Mod(Reference.MOD_ID)
 public class Gnomed {
-	public Gnomed() {
-		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+	public Gnomed(IEventBus eventBus) {
 		GnomeRegistry.ITEMS.register(eventBus);
 		GnomeRegistry.ENTITY_TYPES.register(eventBus);
 		GnomeRegistry.SOUND_EVENTS.register(eventBus);

@@ -15,12 +15,12 @@ public class GnomeRenderer extends MobRenderer<Gnome, GnomeModel<Gnome>> {
 	private static final ResourceLocation texture = new ResourceLocation(Reference.MOD_PREFIX + "textures/entity/gnome.png");
 
 	public GnomeRenderer(EntityRendererProvider.Context context) {
-		super(context, new GnomeModel(context.bakeLayer(ClientHandler.GNOME)), 0.25F);
+		super(context, new GnomeModel<>(context.bakeLayer(ClientHandler.GNOME)), 0.25F);
 	}
 
 	@Nullable
 	@Override
-	public ResourceLocation getTextureLocation(Gnome entity) {
+	public ResourceLocation getTextureLocation(Gnome gnome) {
 		return texture;
 	}
 

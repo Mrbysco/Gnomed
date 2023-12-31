@@ -2,7 +2,7 @@ package com.mrbysco.gnomed.datagen;
 
 import com.mrbysco.gnomed.Reference;
 import com.mrbysco.gnomed.init.GnomeRegistry;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Cloner;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -61,7 +61,7 @@ public class GnomeDataGen {
 	public static final ResourceKey<BiomeModifier> ADD_JUNGLE_GNOME_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS,
 			new ResourceLocation(Reference.MOD_ID, "add_jungle_gnome_spawn"));
 
-	private static HolderLookup.Provider getProvider() {
+	private static RegistrySetBuilder.PatchedRegistries getProvider() {
 		final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
 		registryBuilder.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, context -> {
 			var biomeLookup = context.lookup(Registries.BIOME);
@@ -76,11 +76,13 @@ public class GnomeDataGen {
 					new SpawnerData(GnomeRegistry.GNOME.get(), 12, 1, 1));
 			context.register(ADD_JUNGLE_GNOME_SPAWN, addJungleSpawn);
 		});
-		// We need the BIOME registry to be present so we can use a biome tag, doesn't matter that it's empty
+		// We need the BIOME registry to be present, so we can use a biome tag, doesn't matter that it's empty
 		registryBuilder.add(Registries.BIOME, $ -> {
 		});
 		RegistryAccess.Frozen regAccess = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
-		return registryBuilder.buildPatch(regAccess, VanillaRegistries.createLookup());
+		Cloner.Factory cloner$factory = new Cloner.Factory();
+		net.neoforged.neoforge.registries.DataPackRegistriesHooks.getDataPackRegistriesWithDimensions().forEach(data -> data.runWithArguments(cloner$factory::addCodec));
+		return registryBuilder.buildPatch(regAccess, VanillaRegistries.createLookup(), cloner$factory);
 	}
 
 	private static class GnomeLoot extends LootTableProvider {
