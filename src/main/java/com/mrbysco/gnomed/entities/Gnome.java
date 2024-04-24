@@ -1,7 +1,7 @@
 package com.mrbysco.gnomed.entities;
 
 import com.mrbysco.gnomed.init.GnomeRegistry;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,8 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class Gnome extends PathfinderMob {
 	//TODO: Add animations to the gnome based on the meme?
@@ -55,8 +54,8 @@ public class Gnome extends PathfinderMob {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
 	}
 
 	@Override
@@ -78,11 +77,11 @@ public class Gnome extends PathfinderMob {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
 		if (!levelAccessor.isClientSide() && playerDetection(levelAccessor, 5)) {
 			this.playSound(GnomeRegistry.GNOME_SPAWN.get(), 1F, 1F);
 		}
-		return super.finalizeSpawn(levelAccessor, difficultyInstance, spawnType, groupData, tag);
+		return super.finalizeSpawn(levelAccessor, difficultyInstance, spawnType, groupData);
 	}
 
 	private boolean playerDetection(LevelAccessor levelAccessor, int range) {

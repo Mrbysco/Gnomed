@@ -1,5 +1,6 @@
 package com.mrbysco.gnomed.items;
 
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -41,7 +42,7 @@ public class GnomeHatItem extends Item implements Equipable {
 
 	@Nullable
 	@Override
-	public SoundEvent getEquipSound() {
+	public Holder<SoundEvent> getEquipSound() {
 		return SoundEvents.ARMOR_EQUIP_LEATHER;
 	}
 }
