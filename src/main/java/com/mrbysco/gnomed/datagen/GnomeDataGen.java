@@ -60,9 +60,9 @@ public class GnomeDataGen {
 	}
 
 	public static final ResourceKey<BiomeModifier> ADD_FOREST_GNOME_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS,
-			new ResourceLocation(Reference.MOD_ID, "add_forest_gnome_spawn"));
+			ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "add_forest_gnome_spawn"));
 	public static final ResourceKey<BiomeModifier> ADD_JUNGLE_GNOME_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS,
-			new ResourceLocation(Reference.MOD_ID, "add_jungle_gnome_spawn"));
+			ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "add_jungle_gnome_spawn"));
 
 	private static RegistrySetBuilder.PatchedRegistries getProvider() {
 		final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
@@ -101,8 +101,8 @@ public class GnomeDataGen {
 		}
 
 		private static class GiveMeTheHat extends EntityLootSubProvider {
-			protected GiveMeTheHat() {
-				super(FeatureFlags.REGISTRY.allFlags());
+			protected GiveMeTheHat(HolderLookup.Provider provider) {
+				super(FeatureFlags.REGISTRY.allFlags(), provider);
 			}
 
 			@Override

@@ -20,18 +20,18 @@ public class GnomeRegistry {
 	public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, Reference.MOD_ID);
 
 	public static final DeferredItem<GnomeHatItem> GNOME_HAT = ITEMS.register("gnome_hat", () -> new GnomeHatItem(new Item.Properties()));
-	public static final DeferredItem<DeferredSpawnEggItem> GNOME_SPAWN_EGG = ITEMS.register("gnome_spawn_egg", () -> new DeferredSpawnEggItem(() -> GnomeRegistry.GNOME.get(), 1189750, 13442571, new Item.Properties()));
+	public static final DeferredItem<DeferredSpawnEggItem> GNOME_SPAWN_EGG = ITEMS.register("gnome_spawn_egg", () -> new DeferredSpawnEggItem(GnomeRegistry.GNOME::get, 1189750, 13442571, new Item.Properties()));
 
 	public static final DeferredHolder<EntityType<?>, EntityType<Gnome>> GNOME = ENTITY_TYPES.register("gnome", () ->
 			EntityType.Builder.<Gnome>of(Gnome::new, MobCategory.CREATURE)
 					.sized(0.5F, 0.8F).clientTrackingRange(10).build("gnome"));
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> GNOME_SPAWN = SOUND_EVENTS.register("gnome.summon", () ->
-			SoundEvent.createVariableRangeEvent(new ResourceLocation(Reference.MOD_ID, "gnome.summon")));
+			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "gnome.summon")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> GNOME_PASSIVE = SOUND_EVENTS.register("gnome.passive", () ->
-			SoundEvent.createVariableRangeEvent(new ResourceLocation(Reference.MOD_ID, "gnome.passive")));
+			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "gnome.passive")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> GNOME_HURT = SOUND_EVENTS.register("gnome.hurt", () ->
-			SoundEvent.createVariableRangeEvent(new ResourceLocation(Reference.MOD_ID, "gnome.hurt")));
+			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "gnome.hurt")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> GNOME_DEATH = SOUND_EVENTS.register("gnome.death", () ->
-			SoundEvent.createVariableRangeEvent(new ResourceLocation(Reference.MOD_ID, "gnome.death")));
+			SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "gnome.death")));
 }

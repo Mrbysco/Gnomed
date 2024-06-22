@@ -8,11 +8,10 @@ import com.mrbysco.gnomed.entities.Gnome;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class GnomeRenderer extends MobRenderer<Gnome, GnomeModel<Gnome>> {
-	private static final ResourceLocation texture = new ResourceLocation(Reference.MOD_PREFIX + "textures/entity/gnome.png");
+	private static final ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "textures/entity/gnome.png");
 
 	public GnomeRenderer(EntityRendererProvider.Context context) {
 		super(context, new GnomeModel<>(context.bakeLayer(ClientHandler.GNOME)), 0.25F);

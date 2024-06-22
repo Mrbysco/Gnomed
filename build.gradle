@@ -3,8 +3,8 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.107'
-    id 'net.darkhax.curseforgegradle' version '1.1.18'
+    id 'net.neoforged.gradle.userdev' version '7.0.145'
+    id 'net.darkhax.curseforgegradle' version '1.1.24'
     id 'com.modrinth.minotaur' version "2.+"
 }
 
@@ -14,7 +14,7 @@ base {
     archivesName = "${mod_archive_name}-${mc_version}"
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
+// Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -22,7 +22,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 runs {
     // applies to all the run configs below
-    configureEach { net.neoforged.gradle.dsl.common.runs.run.Run run ->
+    configureEach {
         // Recommended logging data for a userdev environment
         systemProperty 'forge.logging.markers', 'REGISTRIES'
 
@@ -32,20 +32,16 @@ runs {
         //Limit ram usage for the dev environment to 4GB
         jvmArgument '-Xmx4G'
 
-        if (run.project.javaToolchains.launcherFor(java.toolchain).map { it.metadata.vendor }.getOrElse("").contains("JetBrains")) {
-            run.jvmArgument("-XX:+AllowEnhancedClassRedefinition")
-        }
-
         modSource project.sourceSets.main
     }
 
     client {
         // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-        systemProperty 'neoforge.enabledGameTestNamespaces', "${mod_id}"
+        systemProperty 'forge.enabledGameTestNamespaces', "${mod_id}"
     }
 
     server {
-        systemProperty 'neoforge.enabledGameTestNamespaces', "${mod_id}"
+        systemProperty 'forge.enabledGameTestNamespaces', "${mod_id}"
         programArgument '--nogui'
     }
 
@@ -65,32 +61,41 @@ repositories {
     maven {
         url = "https://maven.blamejared.com"
     }
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        url = "https://maven.shedaniel.me/"
+    }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
-//    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-//    compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
 
-//    runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
-
-//    implementation "com.blamejared.crafttweaker:CraftTweaker-neoforge-${mc_version}:${crafttweaker_version}"
+    runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 }
 
 jar {
     manifest {
-        attributes([
-                "Specification-Title"     : "${mod_id}",
-                "Specification-Vendor"    : "Mrbysco",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "Mrbysco",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+        attributes(["Specification-Title"     : "${mod_id}",
+                    "Specification-Vendor"    : "Mrbysco",
+                    "Specification-Version"   : "1", // We are version 1 of ourselves
+                    "Implementation-Title"    : project.name,
+                    "Implementation-Version"  : project.jar.archiveVersion,
+                    "Implementation-Vendor"   : "Mrbysco",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")])
     }
 }
+
 
 publishing {
     publications {
@@ -120,16 +125,16 @@ if (System.getenv().CURSEFORGE_KEY) {
 
         def mainFile = upload(project.curseforge_id, jar)
         mainFile.releaseType = 'beta'
-        mainFile.addGameVersion "NeoForge"
-        mainFile.addGameVersion "${mc_version}"
-        mainFile.addGameVersion "Java 21"
+        mainFile.addModLoader("NeoForge")
+        mainFile.addGameVersion("${mc_version}")
+        mainFile.addJavaVersion("Java 21")
         mainFile.addGameVersion('Server', 'Client')
 
         mainFile.changelog = file("$project.rootDir/changelog.md")
         mainFile.changelogType = 'markdown'
 
-//        mainFile.addRequirement()
-//        mainFile.addOptional()
+//        mainFile.addRequirement(
+//        mainFile.addOptional())
     }
 }
 
@@ -144,6 +149,10 @@ if (System.getenv().MODRINTH_KEY) {
         changelog = file("$project.rootDir/changelog.md").text
         gameVersions = ["${mc_version}"]
         loaders = ["neoforge"]
+
+        dependencies {
+
+        }
     }
 }
 
