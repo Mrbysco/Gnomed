@@ -1,6 +1,7 @@
 package com.mrbysco.gnomed.client.models;
 
-import net.minecraft.client.model.HierarchicalModel;
+import com.mrbysco.gnomed.client.state.GnomeRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -8,10 +9,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Mob;
 
-public class GnomeModel<T extends Mob> extends HierarchicalModel<T> {
-	private final ModelPart root;
+public class GnomeModel extends EntityModel<GnomeRenderState> {
 	private final ModelPart head;
 	private final ModelPart torso;
 	private final ModelPart left_arm;
@@ -20,18 +19,13 @@ public class GnomeModel<T extends Mob> extends HierarchicalModel<T> {
 	private final ModelPart right_leg;
 
 	public GnomeModel(ModelPart part) {
-		this.root = part;
+		super(part);
 		this.head = part.getChild("head");
 		this.torso = part.getChild("torso");
 		this.left_arm = part.getChild("left_arm");
 		this.right_arm = part.getChild("right_arm");
 		this.left_leg = part.getChild("left_leg");
 		this.right_leg = part.getChild("right_leg");
-	}
-
-	@Override
-	public ModelPart root() {
-		return this.root;
 	}
 
 	public static LayerDefinition createMesh() {
@@ -93,7 +87,9 @@ public class GnomeModel<T extends Mob> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(GnomeRenderState state) {
+		float limbSwing = state.walkAnimationPos;
+		float limbSwingAmount = state.walkAnimationSpeed;
 		this.right_leg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
 		this.left_leg.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount * 0.5F;
 		this.right_leg.yRot = 0.0F;

@@ -9,7 +9,8 @@ import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 public class GnomeSpawning {
 	public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
-		event.register(GnomeRegistry.GNOME.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+		event.register(GnomeRegistry.GNOME.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+				Mob::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
 	}
 
 	public static void registerEntityAttributes(EntityAttributeCreationEvent event) {

@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public class ClientHandler {
-	public static final ModelLayerLocation GNOME = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Reference.MOD_ID, "gnome"), "main");
+	public static final ModelLayerLocation GNOME = new ModelLayerLocation(Reference.modLoc("gnome"), "main");
 
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(GnomeRegistry.GNOME.get(), GnomeRenderer::new);

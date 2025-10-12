@@ -1,0 +1,33 @@
+{
+  "gnome.death": {
+    "sounds": [
+      "gnomed:gnome/gnome_death"
+    ],
+    "subtitle": "gnomed.subtitle.gnome.death"
+  },
+  "gnome.hurt": {
+    "sounds": [
+      "gnomed:gnome/gnome_ambient"
+    ],
+    "subtitle": "gnomed.subtitle.gnome.hurt"
+  },
+  "gnome.passive": {
+    "sounds": [
+      "gnomed:gnome/gnome_ambient",
+      "gnomed:gnome/gnome_ambient2",
+      "gnomed:gnome/gnome_ambient3",
+      "gnomed:gnome/gnome_ambient4",
+      "gnomed:gnome/gnome_ambient5"
+    ],
+    "subtitle": "gnomed.subtitle.gnome.passive"
+  },
+  "gnome.summon": {
+    "sounds": [
+      {
+        "name": "gnomed:gnome/gnome_spawn",
+        "stream": true
+      }
+    ],
+    "subtitle": "gnomed.subtitle.gnome.summon"
+  }
+}

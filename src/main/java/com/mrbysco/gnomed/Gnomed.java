@@ -15,7 +15,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 public class Gnomed {
 	public Gnomed(IEventBus eventBus, Dist dist) {
 		GnomeRegistry.ITEMS.register(eventBus);
-		GnomeRegistry.ENTITY_TYPES.register(eventBus);
+		GnomeRegistry.ENTITIES.register(eventBus);
 		GnomeRegistry.SOUND_EVENTS.register(eventBus);
 
 		eventBus.addListener(this::addTabContents);
