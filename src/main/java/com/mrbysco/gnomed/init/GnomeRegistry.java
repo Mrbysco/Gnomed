@@ -1,8 +1,8 @@
 package com.mrbysco.gnomed.init;
 
 import com.mrbysco.gnomed.Reference;
-import com.mrbysco.gnomed.entities.Gnome;
-import com.mrbysco.gnomed.items.GnomeHatItem;
+import com.mrbysco.gnomed.entity.Gnome;
+import com.mrbysco.gnomed.item.GnomeHatItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

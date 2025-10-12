@@ -1,4 +1,4 @@
-package com.mrbysco.gnomed.items;
+package com.mrbysco.gnomed.item;
 
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;

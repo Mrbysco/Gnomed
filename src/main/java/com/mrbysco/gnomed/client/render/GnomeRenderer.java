@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mrbysco.gnomed.Reference;
 import com.mrbysco.gnomed.client.ClientHandler;
 import com.mrbysco.gnomed.client.models.GnomeModel;
-import com.mrbysco.gnomed.entities.Gnome;
+import com.mrbysco.gnomed.entity.Gnome;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

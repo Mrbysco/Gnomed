@@ -8,13 +8,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 @Mod(Reference.MOD_ID)
 public class Gnomed {
-	public Gnomed(IEventBus eventBus, Dist dist, ModContainer container) {
+	public Gnomed(IEventBus eventBus, Dist dist) {
 		GnomeRegistry.ITEMS.register(eventBus);
 		GnomeRegistry.ENTITY_TYPES.register(eventBus);
 		GnomeRegistry.SOUND_EVENTS.register(eventBus);

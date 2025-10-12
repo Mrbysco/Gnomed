@@ -1,6 +1,6 @@
 package com.mrbysco.gnomed.init;
 
-import com.mrbysco.gnomed.entities.Gnome;
+import com.mrbysco.gnomed.entity.Gnome;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.level.levelgen.Heightmap;

@@ -1,4 +1,4 @@
-package com.mrbysco.gnomed.entities;
+package com.mrbysco.gnomed.entity;
 
 import com.mrbysco.gnomed.init.GnomeRegistry;
 import net.minecraft.network.syncher.SynchedEntityData;
