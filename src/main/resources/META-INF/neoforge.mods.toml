@@ -17,12 +17,12 @@ Im not a Gnelf, I'm not a Gnoblin. I'm a GNOME AND YOU'VE BEEN GNOMED
 [[dependencies.gnomed]]
 modId="minecraft"
 type="REQUIRED"
-versionRange="[1.21,1.22)"
+versionRange="[1.21.5,1.22)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.gnomed]]
 modId="neoforge"
 type="REQUIRED"
-versionRange="[21.0.75-beta,)"
+versionRange="[21.5.0-beta,)"
 ordering="NONE"
 side="BOTH"

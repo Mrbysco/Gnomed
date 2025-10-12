@@ -6,6 +6,7 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
 
 public class GnomeModelProvider extends ModelProvider {
@@ -16,6 +17,6 @@ public class GnomeModelProvider extends ModelProvider {
 	@Override
 	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
 		itemModels.itemModelOutput.accept(GnomeRegistry.GNOME_HAT.get(), ItemModelUtils.plainModel(GnomeRegistry.GNOME_HAT.getId().withPrefix("item/")));
-		itemModels.generateSpawnEgg(GnomeRegistry.GNOME_SPAWN_EGG.get(), 1189750, 13442571);
+		itemModels.generateFlatItem(GnomeRegistry.GNOME_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
 	}
 }

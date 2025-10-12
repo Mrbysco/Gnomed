@@ -7,8 +7,8 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.util.random.Weighted;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.world.BiomeModifier;
@@ -30,12 +30,12 @@ public class GnomeDatapackProvider extends DatapackBuiltinEntriesProvider {
 
 				final BiomeModifier addSpawn = BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
 						biomeLookup.getOrThrow(BiomeTags.IS_FOREST),
-						new MobSpawnSettings.SpawnerData(GnomeRegistry.GNOME.get(), 12, 1, 1));
+						new Weighted<>(new MobSpawnSettings.SpawnerData(GnomeRegistry.GNOME.get(), 1, 1), 12));
 				context.register(ADD_FOREST_GNOME_SPAWN, addSpawn);
 
 				final BiomeModifier addJungleSpawn = BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
 						biomeLookup.getOrThrow(BiomeTags.IS_JUNGLE),
-						new MobSpawnSettings.SpawnerData(GnomeRegistry.GNOME.get(), 12, 1, 1));
+						new Weighted<>(new MobSpawnSettings.SpawnerData(GnomeRegistry.GNOME.get(), 1, 1), 12));
 				context.register(ADD_JUNGLE_GNOME_SPAWN, addJungleSpawn);
 			});
 
