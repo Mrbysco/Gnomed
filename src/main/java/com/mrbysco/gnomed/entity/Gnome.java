@@ -61,7 +61,7 @@ public class Gnome extends PathfinderMob {
 
 	@Override
 	public void tick() {
-		if (!this.level().isClientSide) {
+		if (!this.level().isClientSide()) {
 			if (playerDetection(this.level(), 10)) {
 				if (hasEffect(MobEffects.INVISIBILITY)) {
 					removeEffect(MobEffects.INVISIBILITY);

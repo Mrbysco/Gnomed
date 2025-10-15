@@ -36,7 +36,7 @@ public class GnomeRegistry {
 			.stacksTo(1).component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.HEAD)
 					.setEquipSound(SoundEvents.ARMOR_EQUIP_LEATHER).build()));
 	public static final DeferredItem<SpawnEggItem> GNOME_SPAWN_EGG = ITEMS.registerItem("gnome_spawn_egg", (properties) ->
-			new SpawnEggItem(GnomeRegistry.GNOME.get(), properties));
+			new SpawnEggItem(properties.spawnEgg(GnomeRegistry.GNOME.get())));
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> GNOME_SPAWN = SOUND_EVENTS.register("gnome.summon", () ->
 			SoundEvent.createVariableRangeEvent(Reference.modLoc("gnome.summon")));
