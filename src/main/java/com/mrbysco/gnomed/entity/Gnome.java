@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Gnome extends PathfinderMob {
@@ -75,13 +76,15 @@ public class Gnome extends PathfinderMob {
 		super.tick();
 	}
 
-	@Nullable
+
+	@SuppressWarnings("deprecation")
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, EntitySpawnReason spawnType, @Nullable SpawnGroupData groupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, @NotNull DifficultyInstance difficulty,
+	                                    @NotNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
 		if (!levelAccessor.isClientSide() && playerDetection(levelAccessor, 5)) {
 			this.playSound(GnomeRegistry.GNOME_SPAWN.get(), 1F, 1F);
 		}
-		return super.finalizeSpawn(levelAccessor, difficultyInstance, spawnType, groupData);
+		return super.finalizeSpawn(levelAccessor, difficulty, spawnReason, groupData);
 	}
 
 	private boolean playerDetection(LevelAccessor levelAccessor, int range) {

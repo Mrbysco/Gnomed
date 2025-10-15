@@ -5,7 +5,6 @@ import com.mrbysco.gnomed.client.models.GnomeModel;
 import com.mrbysco.gnomed.client.render.GnomeRenderer;
 import com.mrbysco.gnomed.init.GnomeRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public class ClientHandler {
