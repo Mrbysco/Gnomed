@@ -32,7 +32,7 @@ public class GnomeRegistry {
 					.eyeHeight(0.7F)
 	);
 
-	public static final DeferredItem<Item> GNOME_HAT = ITEMS.registerSimpleItem("gnome_hat", new Item.Properties()
+	public static final DeferredItem<Item> GNOME_HAT = ITEMS.registerSimpleItem("gnome_hat", () -> new Item.Properties()
 			.stacksTo(1).component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.HEAD)
 					.setEquipSound(SoundEvents.ARMOR_EQUIP_LEATHER).build()));
 	public static final DeferredItem<SpawnEggItem> GNOME_SPAWN_EGG = ITEMS.registerItem("gnome_spawn_egg", (properties) ->

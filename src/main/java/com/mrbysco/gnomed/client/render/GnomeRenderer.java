@@ -8,11 +8,11 @@ import com.mrbysco.gnomed.client.state.GnomeRenderState;
 import com.mrbysco.gnomed.entity.Gnome;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 public class GnomeRenderer extends MobRenderer<Gnome, GnomeRenderState, GnomeModel> {
-	private static final ResourceLocation texture = Reference.modLoc("textures/entity/gnome.png");
+	private static final Identifier texture = Reference.modLoc("textures/entity/gnome.png");
 
 	public GnomeRenderer(EntityRendererProvider.Context context) {
 		super(context, new GnomeModel(context.bakeLayer(ClientHandler.GNOME)), 0.25F);
@@ -30,7 +30,7 @@ public class GnomeRenderer extends MobRenderer<Gnome, GnomeRenderState, GnomeMod
 
 	@NotNull
 	@Override
-	public ResourceLocation getTextureLocation(GnomeRenderState state) {
+	public Identifier getTextureLocation(GnomeRenderState state) {
 		return texture;
 	}
 
